@@ -1,0 +1,110 @@
+.dashboard {
+    padding: 2rem;
+    margin-top: 60px;
+  }
+  
+  .dashboard-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .post-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-header {
+    margin-bottom: 1rem;
+  }
+  
+  .post-header h3 {
+    margin: 0 0 0.5rem 0;
+    color: #2d3748;
+  }
+  
+  .author, .date {
+    color: #718096;
+    font-size: 0.875rem;
+    margin-right: 1rem;
+  }
+  
+  .post-content {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .post-interactions {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .like-button, .comment-button {
+    background: none;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .like-button:hover, .comment-button:hover {
+    background: #f7fafc;
+  }
+  
+  .like-button.liked {
+    color: #e53e3e;
+    border-color: #e53e3e;
+  }
+  
+  .comment-form {
+    margin: 1rem 0;
+  }
+  
+  .comment-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .comment-form button {
+    background: #4299e1;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .comments-section {
+    margin-top: 1rem;
+  }
+  
+  .comment {
+    padding: 1rem;
+    border-left: 3px solid #e2e8f0;
+    margin: 0.5rem 0;
+    background: #f8fafc;
+  }
+  
+  .comment strong {
+    color: #2d3748;
+    margin-right: 0.5rem;
+  }
+  
+  .comment-date {
+    color: #718096;
+    font-size: 0.75rem;
+  }
+  
+  .comment p {
+    margin: 0.5rem 0 0 0;
+    color: #4a5568;
+  }
