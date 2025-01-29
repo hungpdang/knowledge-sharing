@@ -12,6 +12,7 @@ import NewsManagement from './pages/NewsManagement';
 import Dashboard from './pages/Dashboard';
 import Navigation from './Navigation';
 import Profile from './pages/Profile';
+import UserManagement from './pages/UserManagement';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -56,6 +57,12 @@ function App() {
           <Route
             path="/profile"
             element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/users"
+            element={
+              isAuthenticated ? <UserManagement /> : <Navigate to="/login" />
+            }
           />
           <Route
             path="/"
