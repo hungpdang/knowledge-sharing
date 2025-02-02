@@ -90,15 +90,21 @@ router.put('/:id', auth, isAdmin, async (req, res) => {
 router.put('/:id/reset-password', auth, isAdmin, async (req, res) => {
   try {
     const { newPassword } = req.body;
-    const user = await User.findById(req.params.id);
+
+    // Hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update user's password directly
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { password: hashedPassword },
+      { new: true }
+    );
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
-    await user.save();
 
     res.json({ message: 'Password reset successfully' });
   } catch (err) {
