@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import '../styles/Dashboard.css';
 import Notification from '../components/Notification';
-import { formatDateTime } from '../utils/dateFormat';
 
 function Dashboard() {
   const [posts, setPosts] = useState([]);
   const [notification, setNotification] = useState(null);
   const [commentText, setCommentText] = useState('');
   const [activeCommentPost, setActiveCommentPost] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchPosts();
@@ -92,6 +92,19 @@ function Dashboard() {
     }
   };
 
+  const getFilteredPosts = () => {
+    if (!searchQuery.trim()) return posts;
+
+    const query = searchQuery.toLowerCase();
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(query) ||
+        post.content.toLowerCase().includes(query) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(query)) ||
+        post.author.username.toLowerCase().includes(query)
+    );
+  };
+
   return (
     <div className="dashboard">
       {notification && (
@@ -105,13 +118,23 @@ function Dashboard() {
       <div className="dashboard-container">
         <h1>Trang chủ</h1>
 
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Tìm kiếm bài viết..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+
         <div className="posts-list">
-          {posts.map((post) => (
+          {getFilteredPosts().map((post) => (
             <div key={post._id} className="post-card">
               <div className="post-header">
                 <h3>{post.title}</h3>
                 <span className="author">Đăng bởi: {post.author.username}</span>
-                <span className="date">{formatDateTime(post.createdAt)}</span>
+                <span className="date">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </span>
               </div>
 
               <div className="post-content">
@@ -169,7 +192,7 @@ function Dashboard() {
                   <div key={index} className="comment">
                     <strong>{comment.author.username}</strong>
                     <span className="comment-date">
-                      {formatDateTime(comment.createdAt)}
+                      {new Date(comment.createdAt).toLocaleDateString()}
                     </span>
                     <p>{comment.content}</p>
                   </div>
